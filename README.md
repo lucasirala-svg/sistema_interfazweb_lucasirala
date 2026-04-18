@@ -6,22 +6,23 @@ Este repositorio contiene el desarrollo de una Landing Page interactiva con un c
 **EstudiaSmart** es una plataforma diseñada para ayudar a estudiantes universitarios a organizar sus horarios, gestionar tareas pendientes y mejorar su concentración utilizando técnicas de estudio (como la técnica Pomodoro), todo en un solo lugar y reduciendo el estrés académico.
 
 ## 🛠️ Tecnologías Utilizadas
-* **HTML5:** Estructura de la página utilizando etiquetas semánticas.
-* **CSS3:** Estilos personalizados para la interfaz del chatbot.
-* **Bootstrap 5:** Framework para un diseño rápido, limpio y completamente adaptable (responsive).
-* **JavaScript (Vanilla):** Lógica funcional del chatbot (detección de palabras clave, historial de chat y respuestas dinámicas).
+**Frontend (Cliente):**
+* **HTML5 & CSS3:** Estructura semántica y diseño personalizado.
+* **Bootstrap 5:** Framework para un layout adaptable (Responsive Design).
+* **JavaScript (Vanilla):** Manejo del DOM, eventos y peticiones HTTP (`fetch`).
+
+**Backend (Servidor):**
+* **Node.js:** Entorno de ejecución para el servidor.
+* **Express.js:** Framework para crear la API REST de forma sencilla.
+* **CORS:** Middleware para permitir la comunicación segura entre el frontend y el backend.
 
 ## 📂 Estructura del Repositorio
-El proyecto está dividido en el código fuente de la página y la documentación del proceso:
-
-* `index.html` - Estructura principal de la Landing Page.
-* `style.css` - Hoja de estilos (incluye el diseño del botón flotante y la ventana del chat).
-* `script.js` - Lógica del chatbot y su base de datos de respuestas.
-* `/Tareas/` - Carpeta con la documentación del proceso de creación:
-  * `T1.md`: Definición del producto, público objetivo y propuesta de valor.
-  * `T2.md`: Benchmarking y análisis de landing pages de referencia (Notion, Todoist, Forest).
-  * `T3.md`: Definición del layout, flujo visual y etiquetas semánticas.
-  * `T4.md`: Objetivo, justificación y preguntas del chatbot.
+* `index.html` - Interfaz principal (Landing Page).
+* `style.css` - Hoja de estilos del proyecto y del chatbot.
+* `script.js` - Lógica del cliente (envía y recibe mensajes del servidor).
+* `server.js` - **Servidor Backend** (contiene la API y la "inteligencia/base de datos" del bot).
+* `package.json` - Archivo de configuración de Node.js y dependencias.
+* `/Tareas/` - Documentación académica del proceso (Archivos T1.md a T4.md).
 
 ## ⚙️ Cómo ejecutar el proyecto
 No se requiere ninguna instalación compleja ni servidores de bases de datos.

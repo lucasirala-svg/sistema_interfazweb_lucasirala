@@ -1,0 +1,24 @@
+{
+  "name": "sistema_interfazweb_lucasirala",
+  "version": "1.0.0",
+  "description": "Este repositorio contiene el desarrollo de una Landing Page interactiva con un chatbot integrado, creado como proyecto académico para la materia **\"Sistema de Interfaz Web\"**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasirala-svg/sistema_interfazweb_lucasirala.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasirala-svg/sistema_interfazweb_lucasirala/issues"
+  },
+  "homepage": "https://github.com/lucasirala-svg/sistema_interfazweb_lucasirala#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
