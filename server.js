@@ -19,19 +19,69 @@ const baseDeDatosBot = [
   { palabras:["consejo", "tip", "tips", "recomendación", "útil", "ayúdame"], respuesta: "💡 TIP: Tu cerebro no se concentra más de 40 min. Usa Pomodoro: estudia 25 min, descansa 5." }
 ];
 
+const decisionTree = {
+    "root": {
+        text: "¡Hola! Soy el asistente de EstudiaSmart. ¿Sobre qué tema necesitas ayuda?",
+        options:[
+            { label: "💰 Planes y Precios", next: "planes" },
+            { label: "🛠️ Soporte Técnico", next: "soporte" },
+            { label: "✍️ Escribir mi duda", next: "libre" }
+        ],
+        isFreeText: false
+    },
+    "planes": {
+        text: "Ofrecemos un plan 100% Gratis y un plan Premium por Gs. 40.000 mensuales con funciones ilimitadas.",
+        options:[
+            { label: "Volver al inicio", next: "root" }
+        ],
+        isFreeText: false
+    },
+    "soporte": {
+        text: "¿Qué tipo de problema técnico presentas?",
+        options:[
+            { label: "🔑 Olvidé mi contraseña", next: "pass" },
+            { label: "📱 Problemas con la App", next: "app" },
+            { label: "Volver al inicio", next: "root" }
+        ],
+        isFreeText: false
+    },
+    "pass": {
+        text: "En la pantalla de inicio, haz clic en 'Olvidé mi contraseña' y te enviaremos un correo para recuperarla.",
+        options: [{ label: "Volver al inicio", next: "root" }],
+        isFreeText: false
+    },
+    "app": {
+        text: "Si la app se cierra o no carga, asegúrate de actualizarla. Si el error persiste, escríbenos a soporte@estudiasmart.com.",
+        options:[{ label: "Volver al inicio", next: "root" }],
+        isFreeText: false
+    },
+    "libre": {
+        text: "Escribe tu consulta abajo y haré lo posible por responderte:",
+        options:[], 
+        isFreeText: true 
+    }
+};
+
+app.post('/api/tree', (req, res) => {
+    const nodeId = req.body.nodeId || "root";
+    const nodoActual = decisionTree[nodeId];
+    if (nodoActual) {
+        res.json(nodoActual);
+    } else {
+        res.json(decisionTree["root"]); 
+    }
+});
+
 app.post('/api/chat', (req, res) => {
     const preguntaUsuario = req.body.pregunta.toLowerCase();
-    
     let respuestaFinal = "No entendí tu consulta, ¿podés reformularla?";
 
     for (let item of baseDeDatosBot) {
-        let coincide = item.palabras.some(palabra => preguntaUsuario.includes(palabra));
-        if (coincide) {
+        if (item.palabras.some(palabra => preguntaUsuario.includes(palabra))) {
             respuestaFinal = item.respuesta;
             break;
         }
     }
-
     res.json({ respuesta: respuestaFinal });
 });
 
