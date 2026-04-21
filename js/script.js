@@ -26,20 +26,32 @@ function agregarMensaje(texto, tipo) {
 
 async function procesarPregunta(pregunta) {
     try {
+        const msjEscribiendo = document.createElement('div');
+        msjEscribiendo.classList.add('message', 'bot-message');
+        msjEscribiendo.innerHTML = "<em>Escribiendo... ✍️</em>";
+        msjEscribiendo.id = "escribiendo-temp"; 
+        cajaMensajes.appendChild(msjEscribiendo);
+        cajaMensajes.scrollTop = cajaMensajes.scrollHeight;
+
         const respuestaServidor = await fetch('http://localhost:3000/api/chat', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ pregunta: pregunta })
         });
 
         const datos = await respuestaServidor.json();
 
-        agregarMensaje(datos.respuesta, 'bot');
+        setTimeout(() => {
+            const temp = document.getElementById('escribiendo-temp');
+            if(temp) temp.remove();
+
+            agregarMensaje(datos.respuesta, 'bot');
+        }, 1000); 
         
     } catch (error) {
-        agregarMensaje("Error: El servidor backend está desconectado. Por favor, enciéndelo.", 'bot');
+        const temp = document.getElementById('escribiendo-temp');
+        if(temp) temp.remove();
+        agregarMensaje("Error: El servidor backend está desconectado. Por favor, enciéndelo ejecutando 'node server.js'.", 'bot');
     }
 }
 
